@@ -1,4 +1,6 @@
-﻿namespace TaskScheduler.Models
+﻿using DutyModels;
+
+namespace DutyDatabaseLayer
 {
     public interface IProjectRepository
     {

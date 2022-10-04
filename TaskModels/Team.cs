@@ -1,9 +1,7 @@
-﻿namespace TaskScheduler.Models
+﻿namespace DutyModels
 {
-    public class Team
+    public class Team : FullAudit
     {
-        public long? TeamID { get; set; }
-
         public string Name { get; set; } = string.Empty;
 
         public IEnumerable<Employee> Employees { get; set; } = Enumerable.Empty<Employee>();

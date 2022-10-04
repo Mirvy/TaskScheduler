@@ -1,12 +1,8 @@
-﻿namespace TaskScheduler.Models
+﻿namespace DutyModels
 {
-    public class Task
+    public class Duty : FullAudit
     {
-        public long? TaskID { get; set; }
-
         public string Description { get; set; } = string.Empty;
-
-        public DateTime Created { get; set; }
 
         public DateTime Due { get; set; }
 

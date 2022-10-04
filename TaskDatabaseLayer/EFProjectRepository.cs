@@ -1,10 +1,13 @@
-﻿namespace TaskScheduler.Models
+﻿using DutyModels;
+using DutyDbLibrary;
+
+namespace DutyDatabaseLayer
 {
     public class EFProjectRepository : IProjectRepository
     {
-        private DataContext context;
+        private DutyContext context;
 
-        public EFProjectRepository(DataContext ctx)
+        public EFProjectRepository(DutyContext ctx)
         {
             context = ctx;
         }

@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using DutyModels;
 
-namespace TaskScheduler.Models
+namespace DutyDbLibrary
 {
-    public class DataContext : DbContext
+    public class DutyContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options) { }
+        public DutyContext(DbContextOptions<DutyContext> options) : base(options) { }
 
         public DbSet<Employee> Employees => Set<Employee>();
 
@@ -12,7 +13,7 @@ namespace TaskScheduler.Models
 
         public DbSet<Project> Projects => Set<Project>();
 
-        public DbSet<Task> Tasks => Set<Task>();
+        public DbSet<Duty> Duties => Set<Duty>();
 
     }
 }
