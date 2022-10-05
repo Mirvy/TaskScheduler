@@ -21,6 +21,13 @@ namespace TaskScheduler.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Title = "Duty Scheduler";
+            return View(new List<int> { 3,3,2,2,3,3 });
+        }
+
+        public IActionResult Calendar()
+        {
+            ViewBag.Title = "Duty Scheduler Calendar";
             return View();
         }
     }
