@@ -1,10 +1,41 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<Duty>
+
 @{
     Layout = "_Layout";
 }
 
-<div>
-    Duty Controller Works!
-</div>
+<table class="table table-sm table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Due</th>
+            <th>Assigned Employee</th>
+            <th>Completed</th>
+            <th>CreatedById</th>
+            <th>CreatedDate</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Duty d in Model ?? Enumerable.Empty<Duty>())
+        {
+            <tr>
+                <td>@d.Id</td>
+                <td>@d.Description</td>
+                <td>@d.Due</td>
+                <td>@d.Assigned</td>
+                <td>@d.Completed</td>
+                <td>@d.CreatedById</td>
+                <td>@d.CreatedDate</td>
+                <td class="text-center">
+                    <a asp-action="Details" asp-route-id="@d.Id"
+                    class="btn btn-sm btn-info">Details</a>
+                    <a asp-action="Edit" asp-route-id="@d.Id"
+                    class="btn btn-sm btn-info">Details</a>
+                    <a asp-action="Delete" asp-route-id="@d.Id"
+                    class="btn btn-sm btn-info">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

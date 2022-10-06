@@ -71,7 +71,7 @@ namespace DutyDbLibrary.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("Duties");
+                    b.ToTable("Duties", (string)null);
                 });
 
             modelBuilder.Entity("DutyModels.Employee", b =>
@@ -112,7 +112,7 @@ namespace DutyDbLibrary.Migrations
 
                     b.HasIndex("TeamId");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("DutyModels.Project", b =>
@@ -159,7 +159,7 @@ namespace DutyDbLibrary.Migrations
 
                     b.HasIndex("AssignedId");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", (string)null);
                 });
 
             modelBuilder.Entity("DutyModels.Team", b =>
@@ -195,7 +195,7 @@ namespace DutyDbLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teams");
+                    b.ToTable("Teams", (string)null);
                 });
 
             modelBuilder.Entity("DutyModels.Duty", b =>

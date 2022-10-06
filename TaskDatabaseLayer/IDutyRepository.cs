@@ -4,6 +4,8 @@ namespace DutyDatabaseLayer
 {
     public interface IDutyRepository
     {
-        IQueryable<Duty> Duties { get; }
+        public Task<Duty> GetById(int id);
+        public Task<List<Duty>> GetDuties();
+
     }
 }
