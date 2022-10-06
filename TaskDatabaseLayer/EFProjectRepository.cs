@@ -1,5 +1,6 @@
 ﻿using DutyModels;
 using DutyDbLibrary;
+using Microsoft.EntityFrameworkCore;
 
 namespace DutyDatabaseLayer
 {
@@ -12,6 +13,14 @@ namespace DutyDatabaseLayer
             context = ctx;
         }
 
-        public IQueryable<Project> Projects => context.Projects;
+        public async Task<Project> GetById(int id)
+        {
+            return await context.Projects.FindAsync(id);
+        }
+
+        public async Task<List<Project>> GetProjects()
+        {
+            return await context.Projects.ToListAsync();
+        }
     }
 }

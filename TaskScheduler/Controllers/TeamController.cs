@@ -1,4 +1,5 @@
 ﻿using DutyBusinessLayer;
+using DutyModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TaskScheduler.Controllers
@@ -12,10 +13,11 @@ namespace TaskScheduler.Controllers
             _teamService = teamService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            List<Team> teams = await _teamService.GetTeams();
             ViewBag.Title = "Team CRUD Menu";
-            return View();
+            return View(teams);
         }
     }
 }

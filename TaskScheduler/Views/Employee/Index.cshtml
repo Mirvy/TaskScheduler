@@ -1,10 +1,35 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<Employee>
+
 @{
     Layout = "_Layout";
 }
 
-<div>
-    Employee Controller Works!
-</div>
+<table class="table table-sm table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>CreatedById</th>
+            <th>CreatedDate</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Employee e in Model ?? Enumerable.Empty<Employee>())
+        {
+            <tr>
+                <td>@e.Id</td>
+                <td>@e.Name</td>
+                <td>@e.CreatedById</td>
+                <td>@e.CreatedDate</td>
+                <td class="text-center">
+                    <a asp-action="Details" asp-route-id="@e.Id"
+                   class="btn btn-sm btn-info">Details</a>
+                    <a asp-action="Edit" asp-route-id="@e.Id"
+                   class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@e.Id"
+                   class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

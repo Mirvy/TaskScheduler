@@ -12,10 +12,11 @@ namespace TaskScheduler.Controllers
             _employeeService = employeeService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var employees = await _employeeService.GetEmployees();
             ViewBag.Title = "Employee CRUD Menu";
-            return View();
+            return View(employees);
         }
     }
 }

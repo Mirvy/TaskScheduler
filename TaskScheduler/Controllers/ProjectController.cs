@@ -1,4 +1,5 @@
 ﻿using DutyBusinessLayer;
+using DutyModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TaskScheduler.Controllers
@@ -12,10 +13,11 @@ namespace TaskScheduler.Controllers
             _projectService = projectService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            List<Project> projects = await _projectService.GetProjects();
             ViewBag.Title = "Project CRUD Menu";
-            return View();
+            return View(projects);
         }
     }
 }

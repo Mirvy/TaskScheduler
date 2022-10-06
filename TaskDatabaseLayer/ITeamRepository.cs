@@ -4,6 +4,7 @@ namespace DutyDatabaseLayer
 {
     public interface ITeamRepository
     {
-        IQueryable<Team> Teams { get; }
+        public Task<Team> GetById(int id);
+        public Task<List<Team>> GetTeams();
     }
 }

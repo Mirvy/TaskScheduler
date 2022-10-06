@@ -20,8 +20,7 @@ namespace DutyDatabaseLayer
 
         public async Task<List<Duty>> GetDuties()
         {
-            var duties = await context.Duties.ToListAsync();
-            return duties;
+            return await context.Duties.ToListAsync();
         }
 
     }

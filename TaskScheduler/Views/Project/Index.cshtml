@@ -5,6 +5,38 @@
     Layout = "_Layout";
 }
 
-<div>
-    Project Controller Works!
-</div>
+<table class="table table-sm table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Due</th>
+            <th>Assigned Employee</th>
+            <th>Completed</th>
+            <th>CreatedById</th>
+            <th>CreatedDate</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Project p in Model ?? Enumerable.Empty<Project>())
+        {
+            <tr>
+                <td>@p.Id</td>
+                <td>@p.Description</td>
+                <td>@p.Due</td>
+                <td>@p.Assigned</td>
+                <td>@p.Completed</td>
+                <td>@p.CreatedById</td>
+                <td>@p.CreatedDate</td>
+                <td class="text-center">
+                    <a asp-action="Details" asp-route-id="@p.Id"
+                   class="btn btn-sm btn-info">Details</a>
+                    <a asp-action="Edit" asp-route-id="@p.Id"
+                   class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@p.Id"
+                   class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

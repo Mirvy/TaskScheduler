@@ -4,6 +4,7 @@ namespace DutyDatabaseLayer
 {
     public interface IProjectRepository
     {
-        IQueryable<Project> Projects { get; }
+        public Task<Project> GetById(int id);
+        public Task<List<Project>> GetProjects();
     }
 }
