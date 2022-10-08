@@ -6,6 +6,7 @@
 
         public DateTime Due { get; set; }
 
+        public int? AssignedId { get; set; }
         public Team? Assigned { get; set; }
 
         public IEnumerable<Duty> Duties { get; set; } = Enumerable.Empty<Duty>();

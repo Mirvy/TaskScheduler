@@ -4,6 +4,7 @@ using DutyDbLibrary;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DutyDbLibrary.Migrations
 {
     [DbContext(typeof(DutyContext))]
-    partial class DutyContextModelSnapshot : ModelSnapshot
+    [Migration("20221007002404_updateModelsToIncludeIdForCorrespondingOneToOneRelationships")]
+    partial class updateModelsToIncludeIdForCorrespondingOneToOneRelationships
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +31,6 @@ namespace DutyDbLibrary.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("AssignedId")
-                        .HasColumnType("int");
 
                     b.Property<bool>("Completed")
                         .HasColumnType("bit");
@@ -50,6 +49,9 @@ namespace DutyDbLibrary.Migrations
                     b.Property<DateTime>("Due")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("EmployeeId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -67,7 +69,7 @@ namespace DutyDbLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AssignedId");
+                    b.HasIndex("EmployeeId");
 
                     b.HasIndex("ProjectId");
 
@@ -123,9 +125,6 @@ namespace DutyDbLibrary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("AssignedId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Completed")
                         .HasColumnType("bit");
 
@@ -155,9 +154,12 @@ namespace DutyDbLibrary.Migrations
                     b.Property<string>("LastModifiedUserId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TeamId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AssignedId");
+                    b.HasIndex("TeamId");
 
                     b.ToTable("Projects");
                 });
@@ -202,7 +204,7 @@ namespace DutyDbLibrary.Migrations
                 {
                     b.HasOne("DutyModels.Employee", "Assigned")
                         .WithMany("Duties")
-                        .HasForeignKey("AssignedId");
+                        .HasForeignKey("EmployeeId");
 
                     b.HasOne("DutyModels.Project", null)
                         .WithMany("Duties")
@@ -224,7 +226,7 @@ namespace DutyDbLibrary.Migrations
                 {
                     b.HasOne("DutyModels.Team", "Assigned")
                         .WithMany("Projects")
-                        .HasForeignKey("AssignedId");
+                        .HasForeignKey("TeamId");
 
                     b.Navigation("Assigned");
                 });

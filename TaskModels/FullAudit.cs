@@ -10,7 +10,7 @@ namespace DutyModels
         public int Id { get; set; }
         [Required]
         public string CreatedById { get; set; } = string.Empty;
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
         public string? LastModifiedUserId { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public bool IsActive { get; set; }

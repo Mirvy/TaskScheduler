@@ -1,10 +1,94 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model DutyViewModel
+
 @{
     Layout = "_Layout";
 }
 
-<div>>
-    DUTY FORM!
-</div>
+<h5 class="bg-@Model?.Theme text-white text-center p-2">@Model?.Action</h5>
+<form asp-action="@Model?.Action" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="row">
+        <div class="form-group col-1">
+            <label asp-for="Duty.Id"></label>
+            <input class="form-control" asp-for="Duty.Id" name="Id" readonly disabled/>
+        </div>
+        <div class="form-group col-5">
+            <label asp-for="Duty.Assigned"></label>
+            <div>
+                <span asp-validation-for="Duty.AssignedId" class="text-danger"></span>
+            </div>
+            <select asp-for="Duty.AssignedId"
+                    name="AssignedId"
+                    class="form-control" 
+                    disabled="@Model?.ReadOnly"
+                    asp-items="@(new SelectList(Model?.Employees, "Id", "Name"))">
+                <option value="0" selected>No Employee Assigned</option>
+            </select>
+        </div>
+        <div class="form-group col-5">
+            <label asp-for="Duty.Due"></label>
+            <div>
+                <span asp-validation-for="Duty.Due" class="text-danger"></span>
+                <input asp-for="Duty.Due"
+                       name="Due"
+                       data-provide="datepicker"
+                       data-date-startDate="01/01/2022"
+                       readonly="@Model?.ReadOnly"
+                       disabled="@Model?.ReadOnly"
+                       id="#datePicker"/>
+            </div>
+        </div>
+        <div class="form-group col-1">
+            <label asp-for="Duty.Completed"></label>
+            <div>
+                <span asp-validation-for="Duty.Completed" class="text-danger"></span>
+                <input asp-for="Duty.Completed" name="Completed" readonly="@Model?.ReadOnly" disabled="@Model?.ReadOnly"/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-6">
+            <label asp-for="Duty.CreatedById"></label>
+            @if(Model.Action == "Create"){
+                <div>
+                    <input asp-for="Duty.CreatedById" name="CreatedById" />
+                </div>
+            }else{
+                <div>
+                    <input asp-for="Duty.CreatedById" name="CreatedById" readonly />
+                </div>
+            }
+            
+        </div>
+        <div class="form-group col-5">
+            <label asp-for="Duty.CreatedDate"></label>
+            <div>
+                <input asp-for="Duty.CreatedDate"
+                       name="CreatedDate"
+                       data-provide="datepicker"
+                       readonly />
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="Duty.Description"></label>
+        <div>
+            <span asp-validation-for="Duty.Description" class="text-danger"></span>
+        </div>
+        <textarea class="form-control" 
+                  asp-for="Duty.Description"
+                  name="Description"
+                  readonly="@Model?.ReadOnly" 
+                  disabled="@Model?.ReadOnly" />@Model?.Duty.Description</textarea>
+    </div>
+
+
+    @if (Model?.ShowAction == true)
+    {
+        <button class="btn btn-@Model?.Theme mt-2" type="submit">
+            @Model?.Action
+        </button>
+    }
+    <a class="btn btn-outline-secondary mt-2" asp-action="Index">Back</a>
+</form>

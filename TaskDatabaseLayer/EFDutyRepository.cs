@@ -15,12 +15,34 @@ namespace DutyDatabaseLayer
 
         public async Task<Duty> GetById(int id)
         {
-            return await context.Duties.FindAsync(id);
+            return await context.Duties
+                .Include(d => d.Assigned)
+                .FirstOrDefaultAsync(d => d.Id == id);
         }
 
         public async Task<List<Duty>> GetDuties()
         {
-            return await context.Duties.ToListAsync();
+            return await context.Duties
+                .Include(d => d.Assigned)
+                .ToListAsync();
+        }
+
+        public async Task Add(Duty d)
+        {
+            await context.AddAsync(d);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task Update(Duty d)
+        {
+            context.Update(d);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task Remove(Duty d)
+        {
+            context.Remove(d);
+            await context.SaveChangesAsync();
         }
 
     }
