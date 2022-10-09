@@ -21,5 +21,20 @@ namespace DutyBusinessLayer
         {
             return await _employeeRepository.GetEmployees();
         }
+
+        public async Task Update(Employee e)
+        {
+            await _employeeRepository.Update(e);
+        }
+
+        public async Task Remove(Employee e)
+        {
+            await _employeeRepository.Remove(e);
+        }
+
+        public async Task Add(Employee e)
+        {
+            await _employeeRepository.Add(e);
+        }
     }
 }

@@ -48,8 +48,12 @@ namespace TaskScheduler.Controllers
         public async Task<IActionResult> Details(int id)
         {
             Duty? d = await _dutyService.GetById(id);
-            DutyViewModel model = ViewModelFactory.DutyDetails(d);
-            return View("DutyForm",model);
+            if(d != null)
+            {
+                DutyViewModel model = ViewModelFactory.DutyDetails(d);
+                return View("DutyForm", model);
+            }
+            return NotFound();
         }
 
         public async Task<IActionResult> Edit(int id)
@@ -67,7 +71,6 @@ namespace TaskScheduler.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Duty d)
         {
-            Console.WriteLine(d.ToString());
             if (ModelState.IsValid)
             {
                 d.Assigned = default;
@@ -85,7 +88,11 @@ namespace TaskScheduler.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             Duty? d = await _dutyService.GetById(id);
-            return View("DutyForm",ViewModelFactory.DutyDelete(d));
+            if (d != null)
+            {
+                return View("DutyForm", ViewModelFactory.DutyDelete(d));
+            }
+            return NotFound();
         }
 
         [HttpPost]

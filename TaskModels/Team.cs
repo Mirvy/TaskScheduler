@@ -4,8 +4,8 @@
     {
         public string Name { get; set; } = string.Empty;
 
-        public IEnumerable<Employee> Employees { get; set; } = Enumerable.Empty<Employee>();
+        public virtual List<Employee> Employees { get; set; } = new List<Employee>();
 
-        public IEnumerable<Project> Projects { get; set; } = Enumerable.Empty<Project>();
+        public virtual List<Project> Projects { get; set; } = new List<Project>();
     }
 }

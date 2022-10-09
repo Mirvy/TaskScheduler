@@ -7,9 +7,9 @@
         public DateTime Due { get; set; }
 
         public int? AssignedId { get; set; }
-        public Team? Assigned { get; set; }
+        public virtual Team? Assigned { get; set; }
 
-        public IEnumerable<Duty> Duties { get; set; } = Enumerable.Empty<Duty>();
+        public virtual List<Duty> Duties { get; set; } = new List<Duty>();
 
         public bool Completed { get; set; }
     }

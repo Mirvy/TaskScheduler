@@ -55,5 +55,58 @@ namespace DutyBusinessLayer
                     : new List<Employee> { d.Assigned }
             };
         }
+
+        public static EmployeeViewModel EmployeeDetails(Employee e, IEnumerable<Duty> duties, IEnumerable<Team> teams)
+        {
+            return new EmployeeViewModel
+            {
+                Employee = e,
+                Action = "Details",
+                ReadOnly = true,
+                Theme = "info",
+                ShowAction = false,
+                Teams = teams,
+                Duties = duties
+            };
+        }
+
+        public static EmployeeViewModel EmployeeCreate(Employee e, IEnumerable<Duty> duties, IEnumerable<Team> teams)
+        {
+            return new EmployeeViewModel
+            {
+                Employee = e,
+                Action = "Create",
+                Theme = "primary",
+                Teams = teams,
+                Duties = duties
+            };
+        }
+
+        public static EmployeeViewModel EmployeeEdit(Employee e, IEnumerable<Duty> duties, IEnumerable<Team> teams)
+        {
+            return new EmployeeViewModel
+            {
+                Employee = e,
+                Action = "Edit",
+                Theme = "warning",
+                ShowAction = true,
+                Teams = teams,
+                Duties = duties
+            };
+        }
+
+        public static EmployeeViewModel EmployeeDelete(Employee e, IEnumerable<Duty> duties, IEnumerable<Team> teams)
+        {
+            return new EmployeeViewModel
+            {
+                Employee = e,
+                Action = "Delete",
+                ReadOnly = true,
+                Theme = "danger",
+                ShowAction = true,
+                Teams = teams,
+                Duties = duties
+            };
+        }
     }
 }

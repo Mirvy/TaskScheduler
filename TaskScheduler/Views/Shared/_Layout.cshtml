@@ -1,4 +1,10 @@
-﻿<!DOCTYPE HTML>
+﻿@{
+    var controller = Context.GetRouteData().Values["Controller"].ToString();
+    var action = Context.GetRouteData().Values["Action"].ToString();
+}
+
+
+<!DOCTYPE HTML>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -19,13 +25,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" asp-controller="home" asp-action="index">Dashboard</a>
+                        <a class="nav-link @if(controller=="Home" && action=="Index"){<text>active</text>}" asp-controller="home" asp-action="index">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="home" asp-action="calendar">Calendar</a>
+                        <a class="nav-link @if(controller=="Home" && action=="Calendar"){<text>active</text>}" asp-controller="home" asp-action="calendar">Calendar</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle @if(controller=="Duty" || controller=="Employee" || controller=="Project" || controller=="Team"){<text>active</text>}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             CRUD
                         </a>
                         <ul class="dropdown-menu">

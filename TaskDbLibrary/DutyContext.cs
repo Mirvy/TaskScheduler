@@ -15,5 +15,14 @@ namespace DutyDbLibrary
 
         public DbSet<Duty> Duties => Set<Duty>();
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Duty>()
+                .HasOne<Employee>(d => d.Assigned)
+                .WithMany(e => e.Duties)
+                .HasForeignKey(e => e.AssignedId)
+                .OnDelete(DeleteBehavior.SetNull);
+        }
+
     }
 }

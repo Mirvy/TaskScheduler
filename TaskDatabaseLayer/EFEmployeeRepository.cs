@@ -20,7 +20,28 @@ namespace DutyDatabaseLayer
 
         public async Task<List<Employee>> GetEmployees()
         {
-            return await context.Employees.ToListAsync();
+            return await context.Employees
+                .Include(e => e.Team)
+                .Include(e => e.Duties)
+                .ToListAsync();
+        }
+
+        public async Task Update(Employee e)
+        {
+            context.Update(e);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task Remove(Employee e)
+        {
+            context.Remove(e);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task Add(Employee e)
+        {
+            context.Add(e);
+            await context.SaveChangesAsync();
         }
     }
 }
