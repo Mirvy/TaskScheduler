@@ -7,5 +7,10 @@ namespace DutyBusinessLayer
     {
         Task<Project> GetById(int id);
         Task<List<Project>> GetProjects();
+
+        Task Update(Project p);
+
+        Task Remove(Project p);
+        Task Add(Project p);
     }
 }

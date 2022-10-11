@@ -11,7 +11,7 @@
             <th>ID</th>
             <th>Description</th>
             <th>Due</th>
-            <th>Assigned Employee</th>
+            <th>Assigned Team</th>
             <th>Completed</th>
             <th>CreatedById</th>
             <th>CreatedDate</th>
@@ -24,7 +24,7 @@
                 <td>@p.Id</td>
                 <td>@p.Description</td>
                 <td>@p.Due</td>
-                <td>@p.Assigned</td>
+                <td>@p.Assigned?.Name</td>
                 <td>@p.Completed</td>
                 <td>@p.CreatedById</td>
                 <td>@p.CreatedDate</td>
@@ -40,3 +40,4 @@
         }
     </tbody>
 </table>
+<a asp-action="Create" class="btn btn-group-sm btn-primary">Create</a>

@@ -16,29 +16,34 @@ namespace DutyBusinessLayer
                 ShowAction = false,
                 Employees = d == null || d.Assigned == null
                     ? Enumerable.Empty<Employee>()
-                    : new List<Employee> { d.Assigned }
+                    : new List<Employee> { d.Assigned },
+                Projects = d == null || d.Project == null
+                    ? Enumerable.Empty<Project>()
+                    : new List<Project> { d.Project }
             };
         }
 
-        public static DutyViewModel DutyCreate(Duty d, IEnumerable<Employee> employees)
+        public static DutyViewModel DutyCreate(Duty d, IEnumerable<Employee> employees, IEnumerable<Project> projects)
         {
             return new DutyViewModel
             {
                 Duty = d,
                 Action = "Create",
                 Theme = "primary",
-                Employees = employees
+                Employees = employees,
+                Projects = projects
             };
         }
 
-        public static DutyViewModel DutyEdit(Duty d, IEnumerable<Employee> employees)
+        public static DutyViewModel DutyEdit(Duty d, IEnumerable<Employee> employees, IEnumerable<Project> projects)
         {
             return new DutyViewModel
             {
                 Duty = d,
                 Action = "Edit",
                 Theme = "warning",
-                Employees = employees
+                Employees = employees,
+                Projects = projects
             };
         }
 
@@ -106,6 +111,116 @@ namespace DutyBusinessLayer
                 ShowAction = true,
                 Teams = teams,
                 Duties = duties
+            };
+        }
+
+        public static ProjectViewModel ProjectDetails(Project p, IEnumerable<Team> teams, IEnumerable<Duty> duties)
+        {
+            return new ProjectViewModel
+            {
+                Project = p,
+                Action = "Details",
+                ReadOnly = true,
+                Theme = "info",
+                ShowAction = false,
+                Duties = duties,
+                Teams = teams
+            };
+        }
+
+        public static ProjectViewModel ProjectCreate(Project p, IEnumerable<Team> teams, IEnumerable<Duty> duties)
+        {
+            return new ProjectViewModel
+            {
+                Project = p,
+                Action = "Create",
+                ReadOnly = false,
+                Theme = "primary",
+                ShowAction = true,
+                Duties = duties,
+                Teams = teams
+            };
+        }
+
+        public static ProjectViewModel ProjectEdit(Project p, IEnumerable<Team> teams, IEnumerable<Duty> duties)
+        {
+            return new ProjectViewModel
+            {
+                Project = p,
+                Action = "Edit",
+                Theme = "warning",
+                ShowAction = true,
+                Duties = duties,
+                Teams = teams
+            };
+        }
+
+        public static ProjectViewModel ProjectDelete(Project p, IEnumerable<Team> teams, IEnumerable<Duty> duties)
+        {
+            return new ProjectViewModel
+            {
+                Project = p,
+                Action = "Delete",
+                Theme = "danger",
+                ShowAction = true,
+                ReadOnly = true,
+                Teams = teams,
+                Duties = duties
+            };
+        }
+
+        public static TeamViewModel TeamDetails(Team t, IEnumerable<Employee> employees, IEnumerable<Project> projects)
+        {
+            return new TeamViewModel
+            {
+                Team = t,
+                ShowAction = false,
+                ReadOnly = true,
+                Theme = "info",
+                Employees = employees,
+                Projects = projects
+            };
+        }
+
+        public static TeamViewModel TeamCreate(Team t, IEnumerable<Employee> employees, IEnumerable<Project> projects)
+        {
+            return new TeamViewModel
+            {
+                Team = t,
+                ShowAction = true,
+                ReadOnly = false,
+                Theme = "primary",
+                Action = "Create",
+                Employees = employees,
+                Projects = projects
+            };
+        }
+
+        public static TeamViewModel TeamEdit(Team t, IEnumerable<Employee> employees, IEnumerable<Project> projects)
+        {
+            return new TeamViewModel
+            {
+                Team = t,
+                ShowAction = true,
+                ReadOnly = false,
+                Theme = "warning",
+                Action = "Edit",
+                Employees = employees,
+                Projects = projects
+            };
+        }
+
+        public static TeamViewModel TeamDelete(Team t, IEnumerable<Employee> employees, IEnumerable<Project> projects)
+        {
+            return new TeamViewModel
+            {
+                Team = t,
+                ShowAction = true,
+                ReadOnly = true,
+                Theme = "danger",
+                Action = "Delete",
+                Employees = employees,
+                Projects = projects
             };
         }
     }

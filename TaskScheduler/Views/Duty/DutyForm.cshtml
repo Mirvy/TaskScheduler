@@ -12,7 +12,7 @@
             <label asp-for="Duty.Id"></label>
             <input class="form-control" asp-for="Duty.Id" name="Id" readonly disabled/>
         </div>
-        <div class="form-group col-5">
+        <div class="form-group col-2">
             <label asp-for="Duty.Assigned"></label>
             <div>
                 <span asp-validation-for="Duty.AssignedId" class="text-danger"></span>
@@ -25,14 +25,28 @@
                 <option value="0" selected>No Employee Assigned</option>
             </select>
         </div>
+        <div class="form-group col-2">
+            <label asp-for="Duty.Project"></label>
+            <div>
+                <span asp-validation-for="Duty.ProjectId" class="text-danger"></span>
+            </div>
+            <select asp-for="Duty.ProjectId"
+                    name="ProjectId"
+                    class="form-control"
+                    disabled="@Model?.ReadOnly"
+                    asp-items="@(new SelectList(Model?.Projects, "Id", "Description"))">
+                <option value="0" selected>No Project Assigned</option>
+            </select>
+        </div>
         <div class="form-group col-5">
             <label asp-for="Duty.Due"></label>
-            <div>
+            <div class="input-group date">
                 <span asp-validation-for="Duty.Due" class="text-danger"></span>
                 <input asp-for="Duty.Due"
                        name="Due"
+                       type="date"
                        data-provide="datepicker"
-                       data-date-startDate="01/01/2022"
+                       class="form-control"
                        readonly="@Model?.ReadOnly"
                        disabled="@Model?.ReadOnly"
                        id="#datePicker"/>
@@ -62,9 +76,11 @@
         </div>
         <div class="form-group col-5">
             <label asp-for="Duty.CreatedDate"></label>
-            <div>
+            <div class="input-group date">
                 <input asp-for="Duty.CreatedDate"
                        name="CreatedDate"
+                       type="date"
+                       class="form-control"
                        data-provide="datepicker"
                        readonly />
             </div>

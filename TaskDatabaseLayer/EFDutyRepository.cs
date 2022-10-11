@@ -17,6 +17,7 @@ namespace DutyDatabaseLayer
         {
             return await context.Duties
                 .Include(d => d.Assigned)
+                .Include(d => d.Project)
                 .FirstOrDefaultAsync(d => d.Id == id);
         }
 
@@ -24,6 +25,7 @@ namespace DutyDatabaseLayer
         {
             return await context.Duties
                 .Include(d => d.Assigned)
+                .Include(d => d.Project)
                 .ToListAsync();
         }
 

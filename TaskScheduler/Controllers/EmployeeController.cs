@@ -27,6 +27,7 @@ namespace TaskScheduler.Controllers
 
         public async Task<IActionResult> Create()
         {
+            ViewBag.Title = "Employee Create";
             return View("EmployeeForm", ViewModelFactory.EmployeeCreate(new Employee(), await _dutyService.GetDuties(), await _teamService.GetTeams()));
         }
 
@@ -43,11 +44,13 @@ namespace TaskScheduler.Controllers
                 await _employeeService.Add(e);
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Title = "Employee Create";
             return View("EmployeeForm", ViewModelFactory.EmployeeCreate(e, await _dutyService.GetDuties(), await _teamService.GetTeams()));
         }
 
         public async Task<IActionResult> Details(int id)
         {
+            ViewBag.Title = "Employee Details";
             Employee e = await _employeeService.GetById(id);
             if (e != null)
             {
@@ -61,6 +64,7 @@ namespace TaskScheduler.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
+            ViewBag.Title = "Employee Edit";
             Employee e = await _employeeService.GetById(id);
             if (e != null)
             {
@@ -85,11 +89,13 @@ namespace TaskScheduler.Controllers
                 await _employeeService.Update(e);
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Title = "Employee Edit";
             return View("DutyForm", ViewModelFactory.EmployeeEdit(e, await _dutyService.GetDuties(), await _teamService.GetTeams()));
         }
 
         public async Task<IActionResult> Delete(int id)
         {
+            ViewBag.Title = "Employee Delete";
             Employee e = await _employeeService.GetById(id);
             if (e != null)
             {

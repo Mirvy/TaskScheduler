@@ -4,6 +4,7 @@ using DutyDbLibrary;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DutyDbLibrary.Migrations
 {
     [DbContext(typeof(DutyContext))]
-    partial class DutyContextModelSnapshot : ModelSnapshot
+    [Migration("20221011211525_updateRelationshipBetweenProjectAndDutyToAddBackRefFromDutyToProjectAndSetNullOnDelete")]
+    partial class updateRelationshipBetweenProjectAndDutyToAddBackRefFromDutyToProjectAndSetNullOnDelete
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

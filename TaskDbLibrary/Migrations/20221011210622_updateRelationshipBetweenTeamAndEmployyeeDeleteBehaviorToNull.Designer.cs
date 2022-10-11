@@ -4,6 +4,7 @@ using DutyDbLibrary;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DutyDbLibrary.Migrations
 {
     [DbContext(typeof(DutyContext))]
-    partial class DutyContextModelSnapshot : ModelSnapshot
+    [Migration("20221011210622_updateRelationshipBetweenTeamAndEmployyeeDeleteBehaviorToNull")]
+    partial class updateRelationshipBetweenTeamAndEmployyeeDeleteBehaviorToNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -205,14 +207,11 @@ namespace DutyDbLibrary.Migrations
                         .HasForeignKey("AssignedId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("DutyModels.Project", "Project")
+                    b.HasOne("DutyModels.Project", null)
                         .WithMany("Duties")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("ProjectId");
 
                     b.Navigation("Assigned");
-
-                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("DutyModels.Employee", b =>

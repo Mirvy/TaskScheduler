@@ -22,5 +22,23 @@ namespace DutyDatabaseLayer
         {
             return await context.Teams.ToListAsync();
         }
+
+        public async Task Update(Team t)
+        {
+            context.Teams.Update(t);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task Remove(Team t)
+        {
+            context.Teams.Remove(t);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task Add(Team t)
+        {
+            context.Teams.Add(t);
+            await context.SaveChangesAsync();
+        }
     }
 }

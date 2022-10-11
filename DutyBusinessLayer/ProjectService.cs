@@ -22,5 +22,20 @@ namespace DutyBusinessLayer
         {
             return await _repository.GetProjects();
         }
+
+        public async Task Update(Project p)
+        {
+            await _repository.Update(p);
+        }
+
+        public async Task Remove(Project p)
+        {
+            await _repository.Remove(p);
+        }
+
+        public async Task Add(Project p)
+        {
+            await _repository.Add(p);
+        }
     }
 }

@@ -1,0 +1,116 @@
+﻿@model TeamViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+<h5 class="bg-@Model?.Theme text-white text-center p-2">@Model?.Action</h5>
+<form asp-action="@Model?.Action" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="row">
+        <div class="form-group col-1">
+            <label asp-for="Team.Id"></label>
+            <input class="form-control" asp-for="Team.Id" name="Id" readonly disabled/>
+        </div>
+        <div class="form-group col-4">
+            <label asp-for="Team.Name"></label>
+            <div>
+                <span asp-validation-for="Team.Name" class="text-danger"></span>
+            </div>
+            <input class="form-control" asp-for="Team.Name" name="Name" readonly="@Model?.ReadOnly" disabled="@Model?.ReadOnly" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-2">
+            <label asp-for="Team.CreatedById"></label>
+            @if(Model.Action == "Create"){
+                <div>
+                    <input asp-for="Team.CreatedById" name="CreatedById" />
+                </div>
+            }else{
+                <div>
+                    <input asp-for="Team.CreatedById" name="CreatedById" readonly />
+                </div>
+            }
+        </div>
+        <div class="form-group col-2">
+            <label asp-for="Team.CreatedDate"></label>
+            <div class="input-group date">
+                <input asp-for="Team.CreatedDate"
+                       name="CreatedDate"
+                       type="date"
+                       class="form-control"
+                       data-provide="datepicker"
+                       readonly />
+            </div>
+        </div>
+    </div>
+    
+
+    <h4>Assigned Employees</h4>
+    <table class="table table-sm table-bordered table-striped">
+        <thead>
+        <th>Id</th>
+        <th>Description</th>
+        <th class="text-end col-1"> </th>
+        </thead>
+        <tbody>
+            @foreach (Employee e in Model?.Team.Employees ?? Enumerable.Empty<Employee>())
+            {
+                <tr>
+                    <td>@e.Id</td>
+                    <td>@e.Name</td>
+                    @if(Model.Action == "Edit"){
+                        <td class="text-center">
+                            @using (Html.BeginForm())
+                            {
+                                <input hidden value="@Model.Team.Id" name="teamId">
+                                <input hidden value="@e.Id" name="employeeId">
+                                <input asp-action="RemoveEmployee" class="btn btn-sm btn-danger" type="submit" value="Remove">
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if(Model.Action == "Edit"){
+        <h4>Unassigned Employees</h4>
+        <table class="table table-sm table-bordered table-striped">
+            <thead>
+            <th>Id</th>
+            <th>Description</th>
+            <th class="text-end col-1"> </th>
+            </thead>
+            <tbody>
+                @foreach (Employee e in Model?.Employees ?? Enumerable.Empty<Employee>())
+                {
+                    @if (e.TeamId == null)
+                    {
+                        <tr>
+                            <td>@e.Id</td>
+                            <td>@e.Name</td>
+                            <td class="text-center">
+                                @using (Html.BeginForm())
+                                {
+                                    <input hidden value="@Model.Team.Id" name="teamId">
+                                    <input hidden value="@e.Id" name="employeeId">
+                                    <input asp-action="AddEmployee" class="btn btn-sm btn-info" type="submit" value="Add">
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    }
+   
+
+    @if (Model?.ShowAction == true)
+    {
+        <button class="btn btn-@Model?.Theme mt-2" type="submit">
+            @Model?.Action
+        </button>
+    }
+    <a class="btn btn-outline-secondary mt-2" asp-action="Index">Back</a>
+</form>

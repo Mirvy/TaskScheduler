@@ -6,10 +6,13 @@ namespace DutyModels
     {
         public string Description { get; set; } = string.Empty;
 
-        public DateTime Due { get; set; }
+        public DateTime Due { get; set; } = DateTime.Now;
 
         public int? AssignedId { get; set; }
         public virtual Employee? Assigned { get; set; }
+
+        public int? ProjectId { get; set; }
+        public virtual Project? Project { get; set; }
 
         public bool Completed { get; set; }
 

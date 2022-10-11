@@ -2,7 +2,7 @@
 
 namespace DutyBusinessLayer.ViewModels
 {
-    public class DutyViewModel
+    public class DutyViewModel : IViewModel
     {
         public Duty Duty { get; set; } = new Duty();
         public string Action { get; set; } = "Create";
@@ -10,5 +10,6 @@ namespace DutyBusinessLayer.ViewModels
         public string Theme { get; set; } = "primary";
         public bool ShowAction { get; set; } = true;
         public IEnumerable<Employee> Employees { get; set; } = Enumerable.Empty<Employee>();
+        public IEnumerable<Project> Projects { get; set; } = Enumerable.Empty<Project>();
     }
 }

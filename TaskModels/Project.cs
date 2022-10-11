@@ -4,7 +4,7 @@
     {
         public string Description { get; set; } = string.Empty;
 
-        public DateTime Due { get; set; }
+        public DateTime Due { get; set; } = DateTime.Now;
 
         public int? AssignedId { get; set; }
         public virtual Team? Assigned { get; set; }

@@ -46,11 +46,13 @@
                 </div>
             }
         </div>
-        <div class="form-group col-2">
+        <div class="form-group col-5">
             <label asp-for="Employee.CreatedDate"></label>
-            <div>
+            <div class="input-group date">
                 <input asp-for="Employee.CreatedDate"
                        name="CreatedDate"
+                       type="date"
+                       class="form-control"
                        data-provide="datepicker"
                        readonly />
             </div>

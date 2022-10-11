@@ -10,11 +10,13 @@ namespace TaskScheduler.Controllers
     {
         private IDutyService _dutyService;
         private IEmployeeService _employeeService;
+        private IProjectService _projectService;
 
-        public DutyController(IDutyService dutyService,IEmployeeService employeeService)
+        public DutyController(IDutyService dutyService,IEmployeeService employeeService, IProjectService projectService)
         {
             _dutyService = dutyService;
             _employeeService = employeeService;
+            _projectService = projectService;
         }
 
         public async Task<IActionResult> Index()
@@ -26,7 +28,8 @@ namespace TaskScheduler.Controllers
 
         public async Task<IActionResult> Create()
         {
-            return View("DutyForm", ViewModelFactory.DutyCreate(new Duty(), await _employeeService.GetEmployees()));
+            ViewBag.Title = "Duty Create";
+            return View("DutyForm", ViewModelFactory.DutyCreate(new Duty(), await _employeeService.GetEmployees(),await _projectService.GetProjects()));
         }
 
         [HttpPost]
@@ -39,14 +42,20 @@ namespace TaskScheduler.Controllers
                 {
                     d.AssignedId = null;
                 }
+                d.Project = default;
+                if (d.ProjectId == 0)
+                {
+                    d.ProjectId = null;
+                }
                 await _dutyService.Add(d);
                 return RedirectToAction(nameof(Index));
             }
-            return View("DutyForm", ViewModelFactory.DutyCreate(d, await _employeeService.GetEmployees()));
+            return View("DutyForm", ViewModelFactory.DutyCreate(d, await _employeeService.GetEmployees(),await _projectService.GetProjects()));
         }
 
         public async Task<IActionResult> Details(int id)
         {
+            ViewBag.Title = "Duty Details";
             Duty? d = await _dutyService.GetById(id);
             if(d != null)
             {
@@ -58,11 +67,13 @@ namespace TaskScheduler.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
+            ViewBag.Title = "Duty Edit";
             Duty? d = await _dutyService.GetById(id);
             if (d != null)
             {
                 List<Employee> e = await _employeeService.GetEmployees();
-                DutyViewModel model = ViewModelFactory.DutyEdit(d, e);
+                List<Project> p = await _projectService.GetProjects();
+                DutyViewModel model = ViewModelFactory.DutyEdit(d, e, p);
                 return View("DutyForm", model);
             }
             return NotFound();
@@ -78,15 +89,21 @@ namespace TaskScheduler.Controllers
                 {
                     d.AssignedId = null;
                 }
+                d.Project = default;
+                if (d.ProjectId == 0)
+                {
+                    d.ProjectId = null;
+                }
                 await _dutyService.Update(d);
                 return RedirectToAction(nameof(Index));
             }
-            return View("DutyForm", ViewModelFactory.DutyEdit(d,await _employeeService.GetEmployees()));
+            return View("DutyForm", ViewModelFactory.DutyEdit(d,await _employeeService.GetEmployees(),await _projectService.GetProjects()));
         }
 
 
         public async Task<IActionResult> Delete(int id)
         {
+            ViewBag.Title = "Duty Delete";
             Duty? d = await _dutyService.GetById(id);
             if (d != null)
             {
