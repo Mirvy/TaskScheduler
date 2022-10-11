@@ -123,7 +123,7 @@
             <tbody>
                 @foreach (Duty d in Model?.Duties ?? Enumerable.Empty<Duty>())
                 {
-                    @if (!Model.Project.Duties.Contains(d))
+                    @if (d.Project == null)
                     {
                         <tr>
                             <td>@d.Id</td>
