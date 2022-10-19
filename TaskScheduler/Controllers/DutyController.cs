@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using DutyModels;
 using DutyBusinessLayer.ViewModels;
 using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TaskScheduler.Controllers
 {
+    [Authorize]
     public class DutyController : Controller
     {
         private IDutyService _dutyService;

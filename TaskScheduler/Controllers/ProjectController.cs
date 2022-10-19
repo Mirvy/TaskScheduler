@@ -1,10 +1,12 @@
 ﻿using DutyBusinessLayer;
 using DutyBusinessLayer.ViewModels;
 using DutyModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TaskScheduler.Controllers
 {
+    [Authorize]
     public class ProjectController : Controller
     {
         private IProjectService _projectService;

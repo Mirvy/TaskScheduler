@@ -1,0 +1,23 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<nav class="nav">
+    @if (User.Identity.IsAuthenticated){
+        <a asp-area="Identity" asp-page="/Account/Manage/Index"
+       class="nav-link text-black">
+            @User.Identity.Name
+        </a>
+        <a asp-area="Identity" asp-page="/Account/Logout"
+       class="btn btn-outline-info">
+            Logout
+        </a>
+    }
+    else{
+        <a class="btn btn-outline-success" asp-area="Identity" asp-page="/Account/Login">
+            <img src="~/lib/bootstrap-icons/icons/person.svg">
+            Sign In
+        </a>
+    }
+</nav>

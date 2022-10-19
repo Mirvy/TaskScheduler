@@ -34,6 +34,12 @@ namespace DutyDbLibrary
                 .WithOne(d => d.Project)
                 .HasForeignKey(d => d.ProjectId)
                 .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Team>()
+                .HasMany<Project>(t => t.Projects)
+                .WithOne(p => p.Assigned)
+                .HasForeignKey(p => p.AssignedId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
 
     }

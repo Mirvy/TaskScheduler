@@ -2,9 +2,11 @@
 using DutyModels;
 using DutyBusinessLayer.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TaskScheduler.Controllers
 {
+    [Authorize]
     public class TeamController : Controller
     {
         private ITeamService _teamService;
